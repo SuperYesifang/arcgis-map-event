@@ -1,6 +1,6 @@
 {
     "name": "arcgis-map-event",
-    "version": "0.0.1",
+    "version": "1.0.0",
     "description": "arcgis地图事件工具包，提供更方便的事件处理接口。Arcgis Map event Kit, which provides a more convenient event handling interface.",
     "author": "Yesifang",
     "license": "MIT",
@@ -33,8 +33,8 @@
         "@babel/preset-env": "^7.16.11",
         "babel-loader": "^8.2.5",
         "html-webpack-plugin": "^5.5.0",
-        "webpack": "^5.72.0",
-        "webpack-cli": "^4.9.2",
-        "webpack-dev-server": "^4.8.1"
+        "webpack": "^5.73.0",
+        "webpack-cli": "^4.10.0",
+        "webpack-dev-server": "^4.9.2"
     }
 }
