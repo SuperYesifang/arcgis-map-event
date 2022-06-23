@@ -1,6 +1,6 @@
 # arcgis-map-event
 
-![arcgis-map-event](https://img.shields.io/badge/arcgis--map--event-v1.0.1-%23C50008?logo=npm)
+![arcgis-map-event](https://img.shields.io/badge/arcgis--map--event-v1.0.2-%23C50008?logo=npm)
 [![blog](https://img.shields.io/badge/blog-yesifang.com-orange?logo=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAMAAABEpIrGAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAABjFBMVEUAAAAIAQUiBhQVBA05CyK0I2z4MJTgKoV8GEoKAgZyFkT8MZfTKX4dBRFWEDP9MZfMJ3kGAQQHAQTlK4htFUEAHRMATDAAbUQAf1EAh1QAgFAAbUUATDAAHhNMDy7KJngAeUsAKBp9GEr4MJMDAQIAmWEAWzkABAOGGlD9MZYAcUgABQNoFD7mLIoAZUCdHl4ANiKiH2EpCBgAh1UAAgERAwrVKH9nFD0ALBwSAwuqIWXmK4pTEDIAWTgrCBp2F0eVHVmKG1NWETMAdEgAgVAAAQIAJTcATXIAZJQAbqUAap0AVoEAfE4AAQEAN1EAgMAAaEIACQ4Aap4ARiwACQ0AebMAmV8AEwwAAAAAZ5oAZT8AMkkAkFoAEQsAebMAl14AGCQAkl0ALx4AOlYAeEsAGRAATHAAbkUAll0All4AbkYAMB4ATXMABwQAIxYANiIAPicANyIAJBYAQF4AIjIAis0AAgMAhsYAZJYARWYAk9oAHy4ABQcAfbkAO1gAis3/MZgAmmEAld3///8EabibAAAAgHRSTlMACCIVObX54XwKcv3UHVb+zQYH5m0xfrTU4NW1fzJMy8hDffkD/pcHh/69CGjnqJ5ZoynfBBHWZ0kSqudTlCt2lotWwNUCQIOrvrWVzwFe3a4QtnQPz/0gAbKnVe4c0Psp9E9jximBtvj4t0+FCzpaZlo7bTruA+Wtdfs1CNdm7ZpKyEIAAAABYktHRIP8tM/SAAAAB3RJTUUH5QoVBh0NInrzjgAAATtJREFUOMt902VbwzAUBeDLcAYMhru7uzPcXYcP1+EyPMkvZ03TNk0TztfzNnL7BECeCFck/JOo6BiEYuPiVX2CG9EkJsn7ZA9iSUmV9d40ZCYdICMzKzsnNy+/wASFVo+KALCR4hIGSjlQVm4BXFFZRUE1B2q8HMC4tk4D9RxoABvAjRpwuS3QJADcrIkW6witImhrD4OOTtZ7ukAEuFtboqeXjqqvH5xgQL/qoG9oeET/FQIYdQxWAGNmMT4xOTU9MyuCOVbPLywSGhEs6f3yCiFysEr7tXWiABubWu/fIiqwTRfYISqwu0fBvgoc0DlCgCjA4ZF+hWMFODllMzizgfML2l5eXfuNGd7YAARv7+4fHoPc9J/swJlnrn+Rgdc3C4SkT+vd7D8+peDr2+h/FK838Ev3D4W//wNiKCWwWalJAwAAACV0RVh0ZGF0ZTpjcmVhdGUAMjAyMS0xMC0yMVQwNjoyOToxMyswMDowMP1Zb/cAAAAldEVYdGRhdGU6bW9kaWZ5ADIwMjEtMTAtMjFUMDY6Mjk6MTMrMDA6MDCMBNdLAAAAAElFTkSuQmCC)](//yesifang.com)
 
 > arcgis 地图事件工具包，提供更方便的事件处理接口。
@@ -165,12 +165,12 @@ console.log(listeners[1] === listener2); // true
 
 | method | description |
 | -- | -- |
-| [on](### on) | add map event listener. |
-| [off](### off) | remove map event listener. |
-| [reset](### reset) | reset hover or event(s) listener list. |
-| [hover](### hover) | add hover changes to graphic. |
-| [onHover](### onHover) | add hover event listener. |
-| [onClick](### onClick) | add click event listener. |
+| [on](#on) | add map event listener. |
+| [off](#off) | remove map event listener. |
+| [reset](#reset) | reset hover or event(s) listener list. |
+| [hover](#hover) | add hover changes to graphic. |
+| [onHover](#onHover) | add hover event listener. |
+| [onClick](#onClick) | add click event listener. |
 
 
 
@@ -179,9 +179,9 @@ console.log(listeners[1] === listener2); // true
 `instance.on(event, graphic | graphic[], listener:(context)=>{}):remove | remove[]`
 实例的方法。为图形注册一个事件监听器。
 
-+ event: [支持的事件](##事件)
++ event: [支持的事件](#事件)
 + graphic: arcgis的 [Graphic](https://developers.arcgis.com/javascript/latest/api-reference/esri-Graphic.html) 实例
-+ [listener](##监听器): 事件触发时的回调函数（事件监听器）
++ [listener](#监听器): 事件触发时的回调函数（事件监听器）
 + return: 执行结束后的返回结果
   + remove: 当前事件监听器的删除方法。
 
@@ -190,7 +190,7 @@ let mapEvent = new MapEvent(options);
 let remove = mapEvent.on("click", graphic, funciton (context) {
 	// ...做一些什么
 });
-remove(); // remove graphic's event listener.
+remove(); // 删除 graphic 的事件监听器。
 let removes = mapEvent.on("click", [graphic1, graphic2], funciton(context) {
 	// ...做一些什么
 });
@@ -205,9 +205,9 @@ removes[1](); // 删除 graphic2 的事件监听器。
 `instance.off(event, graphic | graphic[], listener | true)`
 实例的方法，删除图形的事件监听器。
 
-+ event: [支持的事件](##事件)
++ event: [支持的事件](#事件)
 + graphic: arcgis的 [Graphic](https://developers.arcgis.com/javascript/latest/api-reference/esri-Graphic.html) 实例
-+ [listener](##监听器): 一个需要删除的事件监听器（必须是已经注册到图形上的）
++ [listener](#监听器): 一个需要删除的事件监听器（必须是已经注册到图形上的）
 	+ `true`: 将会删除图形所有的事件监听器
 
 ```js
@@ -272,7 +272,7 @@ mapEvent.hover(graphic, {
 实例的方法，为图形添加一个"悬停"事件监听器。
 
 + graphic: arcgis的 [Graphic](https://developers.arcgis.com/javascript/latest/api-reference/esri-Graphic.html) 实例
-+ [listener](##监听器): "悬停"事件触发时的回调函数（事件监听器）
++ [listener](#监听器): "悬停"事件触发时的回调函数（事件监听器）
 + return: 执行结束后的返回结果
 	+ remove: 当前事件监听器的删除方法。
 
@@ -294,7 +294,7 @@ removes[1](); // 删除 graphic2 的"悬停"事件监听器 listener_m
 实例的方法，为图形添加一个"点击"事件监听器。
 
 + graphic: arcgis的 [Graphic](https://developers.arcgis.com/javascript/latest/api-reference/esri-Graphic.html) 实例
-+ [listener](##监听器): "点击"事件触发时的回调函数（事件监听器）
++ [listener](#监听器): "点击"事件触发时的回调函数（事件监听器）
 + return: 执行结束后的返回结果
 	+ remove: 当前事件监听器的删除方法。
 
@@ -337,7 +337,7 @@ interface Remove {
 }
 type events = "hover" | "click";
 type context = {
-    type:evets; // event type
+    type:evets; // 事件类型
     $event:ArcgisEventHandle; // 视图原始事件对象
     graphc:Graphic; // 触发该事件的图形
     point:Point; // 鼠标所在位置的点（这是一个Arcgis的Point实例）

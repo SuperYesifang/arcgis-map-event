@@ -1,6 +1,6 @@
 # arcgis-map-event
 
-![arcgis-map-event](https://img.shields.io/badge/arcgis--map--event-v1.0.1-%23C50008?logo=npm)
+![arcgis-map-event](https://img.shields.io/badge/arcgis--map--event-v1.0.2-%23C50008?logo=npm)
 [![blog](https://img.shields.io/badge/blog-yesifang.com-orange?logo=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAMAAABEpIrGAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAABjFBMVEUAAAAIAQUiBhQVBA05CyK0I2z4MJTgKoV8GEoKAgZyFkT8MZfTKX4dBRFWEDP9MZfMJ3kGAQQHAQTlK4htFUEAHRMATDAAbUQAf1EAh1QAgFAAbUUATDAAHhNMDy7KJngAeUsAKBp9GEr4MJMDAQIAmWEAWzkABAOGGlD9MZYAcUgABQNoFD7mLIoAZUCdHl4ANiKiH2EpCBgAh1UAAgERAwrVKH9nFD0ALBwSAwuqIWXmK4pTEDIAWTgrCBp2F0eVHVmKG1NWETMAdEgAgVAAAQIAJTcATXIAZJQAbqUAap0AVoEAfE4AAQEAN1EAgMAAaEIACQ4Aap4ARiwACQ0AebMAmV8AEwwAAAAAZ5oAZT8AMkkAkFoAEQsAebMAl14AGCQAkl0ALx4AOlYAeEsAGRAATHAAbkUAll0All4AbkYAMB4ATXMABwQAIxYANiIAPicANyIAJBYAQF4AIjIAis0AAgMAhsYAZJYARWYAk9oAHy4ABQcAfbkAO1gAis3/MZgAmmEAld3///8EabibAAAAgHRSTlMACCIVObX54XwKcv3UHVb+zQYH5m0xfrTU4NW1fzJMy8hDffkD/pcHh/69CGjnqJ5ZoynfBBHWZ0kSqudTlCt2lotWwNUCQIOrvrWVzwFe3a4QtnQPz/0gAbKnVe4c0Psp9E9jximBtvj4t0+FCzpaZlo7bTruA+Wtdfs1CNdm7ZpKyEIAAAABYktHRIP8tM/SAAAAB3RJTUUH5QoVBh0NInrzjgAAATtJREFUOMt902VbwzAUBeDLcAYMhru7uzPcXYcP1+EyPMkvZ03TNk0TztfzNnL7BECeCFck/JOo6BiEYuPiVX2CG9EkJsn7ZA9iSUmV9d40ZCYdICMzKzsnNy+/wASFVo+KALCR4hIGSjlQVm4BXFFZRUE1B2q8HMC4tk4D9RxoABvAjRpwuS3QJADcrIkW6witImhrD4OOTtZ7ukAEuFtboqeXjqqvH5xgQL/qoG9oeET/FQIYdQxWAGNmMT4xOTU9MyuCOVbPLywSGhEs6f3yCiFysEr7tXWiABubWu/fIiqwTRfYISqwu0fBvgoc0DlCgCjA4ZF+hWMFODllMzizgfML2l5eXfuNGd7YAARv7+4fHoPc9J/swJlnrn+Rgdc3C4SkT+vd7D8+peDr2+h/FK838Ev3D4W//wNiKCWwWalJAwAAACV0RVh0ZGF0ZTpjcmVhdGUAMjAyMS0xMC0yMVQwNjoyOToxMyswMDowMP1Zb/cAAAAldEVYdGRhdGU6bW9kaWZ5ADIwMjEtMTAtMjFUMDY6Mjk6MTMrMDA6MDCMBNdLAAAAAElFTkSuQmCC)](//yesifang.com)
 
 > arcgis 地图事件工具包，提供更方便的事件处理接口。
@@ -50,7 +50,7 @@ let mapEvent = new MapEvent();
 | option | type | description |
 | -- | -- | -- |
 | `view` | `MapView` | map view |
-| `cursor`? | `string` | normal cursor style. default value: `options.view.cursor` |
+| `cursor`? | `string` | normal cursor style. default value: `options.view.cursor` \|\| `"default"` |
 | `hoverCursor`? | `string` | global graphic hover cursor style. default value: `"pointer"` |
 
 
@@ -62,7 +62,7 @@ Instance Properties
 | property | description |
 | -- | -- |
 | `view` | map view instance. |
-| `cursor` | normal cursor style. default value:  `instance.view.cursor` |
+| `cursor` | normal cursor style. default value:  `instance.view.cursor` \|\| `"default"` |
 | `hoverCursor` | global graphic hover cursor style. default value: `"pointer"` |
 | `hoverList` | hover list. |
 | `onHoverList` | hover event listener list. |
@@ -165,12 +165,12 @@ Instance Methods
 
 | method | description |
 | -- | -- |
-| [on](### on) | add map event listener. |
-| [off](### off) | remove map event listener. |
-| [reset](### reset) | reset hover or event(s) listener list. |
-| [hover](### hover) | add hover changes to graphic. |
-| [onHover](### onHover) | add hover event listener. |
-| [onClick](### onClick) | add click event listener. |
+| [on](#on) | add map event listener. |
+| [off](#off) | remove map event listener. |
+| [reset](#reset) | reset hover or event(s) listener list. |
+| [hover](#hover) | add hover changes to graphic. |
+| [onHover](#onHover) | add hover event listener. |
+| [onClick](#onClick) | add click event listener. |
 
 
 
@@ -179,9 +179,9 @@ Instance Methods
 `instance.on(event, graphic | graphic[], listener:(context)=>{}):remove | remove[]`
 Instance's method. Register a event listener to graphic(s).
 
-+ event: [supports events](##events).
++ event: [supports events](#events).
 + graphic: arcgis's Graphic Instance(s).
-+ [listener](##listener): a callback funciton when event happen.(event listener).
++ [listener](#listener): a callback funciton when event happen.(event listener).
 + return: execution return results.
   + remove: current event listener's remove methods(s).
 
@@ -205,9 +205,9 @@ removes[1](); // remove graphic2's event listener.
 `instance.off(event, graphic | graphic[], listener | true)`
 Instance's method. Remove event listener from graphic(s).
 
-+ event: [supports events](##events)
++ event: [supports events](#events)
 + graphic: arcgis's Graphic Instance(s).
-+ [listener](##listener): a event listener need to be deleted (must be registered on the graphic)
++ [listener](#listener): a event listener need to be deleted (must be registered on the graphic)
 	+ `true`: will remove all event listener from graphic(s).
 
 ```js
@@ -272,7 +272,7 @@ mapEvent.hover(graphic, {
 Instance's method. Add a `"hover"` event listener to graphic(s).
 
 + graphic: arcgis Graphic Instance(s).
-+ [listener](##listener): a callback funciton when `"hover"` event happen.(event listener)
++ [listener](#listener): a callback funciton when `"hover"` event happen.(event listener)
 + return: execution return results.
 	+ remove: event listener remove funciton(s).
 
@@ -294,7 +294,7 @@ removes[1](); // remove graphic2's 'hover' event listener listener_m.
 Instance's method. Add a `"click"` event listener to graphic(s).
 
 + graphic: arcgis Graphic Instance(s).
-+ [listener](##listener): a callback funciton when `"click"` event happen.(event listener)
++ [listener](#listener): a callback funciton when `"click"` event happen.(event listener)
 + return: execution return results.
 	+ remove: event listener remove funciton(s).
 
