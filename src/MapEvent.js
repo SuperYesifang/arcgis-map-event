@@ -6,7 +6,7 @@ class MapEvent {
 		this.view = opts.view;
 		this.cursor = opts.cursor || "default";
 		this.hoverCursor = opts.hoverCursor || "pointer";
-		this.objectIdFiled = "objectId";
+		this.objectIdField = "objectId";
 		this._init();
 	}
 	_init() {
@@ -14,7 +14,7 @@ class MapEvent {
 		this.view.on("immediate-click", this._clickHandler.bind(this));
 	}
 	_handler(type, eventList, { graphic, mapPoint: point }, $event) {
-		let key = graphic?.attributes?.[this.objectIdFiled] || graphic;
+		let key = graphic?.attributes?.[this.objectIdField] || graphic;
 		let cbs = eventList.get(key);
 		if (cbs) cbs.forEach((cb, i) => cb({
 			type,
@@ -28,7 +28,7 @@ class MapEvent {
 		let { results } = await this.view.hitTest(event);
 		let graphic;
 		if (results.length) graphic = results[0].graphic;
-		let key = graphic?.attributes?.[this.objectIdFiled] || graphic;
+		let key = graphic?.attributes?.[this.objectIdField] || graphic;
 		if ((!graphic || !this.hoverList.get(key)) && this.view.cursor != this.cursor) {
 			this.view.surface.style.cursor = this.view.cursor = this.cursor;
 		}
@@ -59,7 +59,7 @@ class MapEvent {
 		if (graphic instanceof Array) graphics = graphic;
 		else graphics = [graphic];
 		let removes = graphics.map(graphic => {
-			let key = graphic?.attributes?.[this.objectIdFiled] || graphic;
+			let key = graphic?.attributes?.[this.objectIdField] || graphic;
 			this.hoverList.set(key, { symbol, oSymbol: graphic.symbol, hover: false, options });
 			return () => this.hoverList.delete(key);
 		});
@@ -86,7 +86,7 @@ class MapEvent {
 		}
 		if (eventList) {
 			let removes = graphics.map(graphic => {
-				let key = graphic?.attributes?.[this.objectIdFiled] || graphic;
+				let key = graphic?.attributes?.[this.objectIdField] || graphic;
 				let cbs = eventList.get(key);
 				if (cb instanceof Function) {
 					if (cbs && cbs.length) cbs.push(cb);
@@ -112,7 +112,7 @@ class MapEvent {
 		}
 		if (eventList) {
 			let status = graphics.map(graphic => {
-				let key = graphic?.attributes?.[this.objectIdFiled] || graphic;
+				let key = graphic?.attributes?.[this.objectIdField] || graphic;
 				let cbs = eventList.get(key);
 				if (cbs) {
 					if (cb === true) return eventList.delete(key);
