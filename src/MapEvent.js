@@ -13,7 +13,8 @@ class MapEvent {
 		this.view.on("immediate-click", this._clickHandler.bind(this));
 	}
 	_handler(type, eventList, { graphic, mapPoint: point }, $event) {
-		let cbs = eventList.get(graphic);
+		let key = graphic?.attributes?.arcgis_map_event_id || graphic;
+		let cbs = eventList.get(key);
 		if (cbs) cbs.forEach((cb, i) => cb({
 			type,
 			point,
@@ -26,7 +27,8 @@ class MapEvent {
 		let { results } = await this.view.hitTest(event);
 		let graphic;
 		if (results.length) graphic = results[0].graphic;
-		if ((!graphic || !this.hoverList.get(graphic)) && this.view.cursor != this.cursor) {
+		let key = graphic?.attributes?.arcgis_map_event_id || graphic;
+		if ((!graphic || !this.hoverList.get(key)) && this.view.cursor != this.cursor) {
 			this.view.surface.style.cursor = this.view.cursor = this.cursor;
 		}
 		this.hoverList.forEach((info, g) => {
@@ -56,8 +58,9 @@ class MapEvent {
 		if (graphic instanceof Array) graphics = graphic;
 		else graphics = [graphic];
 		let removes = graphics.map(graphic => {
-			this.hoverList.set(graphic, { symbol, oSymbol: graphic.symbol, hover: false, options });
-			return () => this.hoverList.delete(graphic);
+			let key = graphic?.attributes?.arcgis_map_event_id || graphic;
+			this.hoverList.set(key, { symbol, oSymbol: graphic.symbol, hover: false, options });
+			return () => this.hoverList.delete(key);
 		});
 		if (graphic instanceof Array) return removes;
 		else return removes[0];
@@ -82,10 +85,11 @@ class MapEvent {
 		}
 		if (eventList) {
 			let removes = graphics.map(graphic => {
-				let cbs = eventList.get(graphic);
+				let key = graphic?.attributes?.arcgis_map_event_id || graphic;
+				let cbs = eventList.get(key);
 				if (cb instanceof Function) {
 					if (cbs && cbs.length) cbs.push(cb);
-					else eventList.set(graphic, cbs = [cb]);
+					else eventList.set(key, cbs = [cb]);
 					return () => cbs[cbs.length - 1] == cb && cbs.splice(cbs.length - 1, 1);
 				}
 			});
@@ -107,9 +111,10 @@ class MapEvent {
 		}
 		if (eventList) {
 			let status = graphics.map(graphic => {
-				let cbs = eventList.get(graphic);
+				let key = graphic?.attributes?.arcgis_map_event_id || graphic;
+				let cbs = eventList.get(key);
 				if (cbs) {
-					if (cb === true) return eventList.delete(graphic);
+					if (cb === true) return eventList.delete(key);
 					let i = cbs.indexOf(cb);
 					if (i != -1) {
 						cbs.splice(i, 1);
