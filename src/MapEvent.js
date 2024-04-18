@@ -4,9 +4,9 @@ class MapEvent {
 	onClickList = new Map();
 	constructor(opts) {
 		this.view = opts.view;
-		this.cursor = opts.cursor || "default";
-		this.hoverCursor = opts.hoverCursor || "pointer";
-		this.objectIdField = "objectId";
+		this.cursor = opts.cursor ?? "default";
+		this.hoverCursor = opts.hoverCursor ?? "pointer";
+		this.objectIdField = opts.objectIdField ?? "objectId";
 		this._init();
 	}
 	_init() {

@@ -1,6 +1,6 @@
 {
     "name": "arcgis-map-event",
-    "version": "1.0.5",
+    "version": "1.0.6",
     "description": "arcgis地图事件工具包，提供更方便的事件处理接口。Arcgis Map event Kit, which provides a more convenient event handling interface.",
     "author": "Yesifang",
     "license": "MIT",
